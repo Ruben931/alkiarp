@@ -2909,7 +2909,7 @@ const App = () => {
             {/* Logo et description */}
             <div className="md:col-span-2">
               <div className="flex items-center space-x-4 mb-6">
-                <motion.div 
+          <motion.div 
                   className="w-12 h-12 bg-gradient-to-br from-alkia-violet to-alkia-violetLight rounded-xl flex items-center justify-center relative overflow-hidden"
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   style={{
@@ -2930,16 +2930,16 @@ const App = () => {
                   />
                 </motion.div>
                 
-                <div>
+              <div>
                   <h3 className="text-2xl font-black">
-                    <span className="bg-gradient-to-r from-alkia-violet to-cyan-400 bg-clip-text text-transparent">
-                      AlkiaRP
-                    </span>
-                  </h3>
+                  <span className="bg-gradient-to-r from-alkia-violet to-cyan-400 bg-clip-text text-transparent">
+                    AlkiaRP
+                  </span>
+                </h3>
                   <p className="text-alkia-violet/60 font-mono text-sm">PREMIUM FIVEM SERVER</p>
-                </div>
               </div>
-              
+            </div>
+            
               <p className={`${isDarkMode ? 'text-white/70' : 'text-black/70'} leading-relaxed mb-6 max-w-md`}>
                 Le serveur FiveM de référence pour une expérience RP immersive et authentique. 
                 Rejoignez notre communauté passionnée et vivez des aventures uniques.
@@ -3073,7 +3073,7 @@ const App = () => {
                   <span className="text-alkia-violet font-mono text-sm font-bold">
                     RUBEN
                   </span>
-                </motion.div>
+          </motion.div>
               </div>
             </motion.div>
           </div>

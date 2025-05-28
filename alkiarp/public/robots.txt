@@ -1,7 +1,15 @@
 User-agent: *
 Allow: /
 
+# Sitemap
 Sitemap: https://alkiarp20.vercel.app/sitemap.xml
+
+# Optimisation pour AlkiaRP
+# Mots-clés principaux: AlkiaRP, Alkia RP, Alkiarp, FiveM, GTA RP, Roleplay
+# Serveur FiveM français premium avec scripts exclusifs
+
+# Crawl-delay pour éviter la surcharge
+Crawl-delay: 1
 
 # AlkiaRP - Serveur FiveM Premium
 # Alkia Roleplay - Le meilleur serveur RP français 
