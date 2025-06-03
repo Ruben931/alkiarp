@@ -24,8 +24,8 @@ const App = () => {
   const containerRef = useRef(null);
 
   // Configuration des APIs
-  const DISCORD_SERVER_ID = "TON_DISCORD_SERVER_ID"; // Remplace par ton ID serveur Discord
-  const FIVEM_SERVER_IP = "TON_IP_SERVEUR"; // Remplace par l'IP de ton serveur FiveM
+  const DISCORD_SERVER_ID = "revrp"; // Remplace par ton ID serveur Discord
+  const FIVEM_SERVER_IP = "play.rev-rp.fr"; // Remplace par l'IP de ton serveur FiveM
   const FIVEM_SERVER_PORT = "30120"; // Port par défaut FiveM
 
   // Fonction pour récupérer les membres Discord
@@ -33,7 +33,7 @@ const App = () => {
     try {
       // Option 1: Via Discord Widget API (public)
       const response = await fetch(`https://discord.com/api/guilds/${DISCORD_SERVER_ID}/widget.json`);
-      if (response.ok) {
+      if (response.ok) {   
         const data = await response.json();
         setDiscordMembers(data.presence_count || discordMembers);
       }
@@ -84,7 +84,6 @@ const App = () => {
   // Références pour les sections
   const sectionRefs = {
     accueil: useRef(null),
-    scripts: useRef(null),
     presentation: useRef(null),
     events: useRef(null),
     regles: useRef(null),
@@ -724,11 +723,10 @@ const App = () => {
       // Détection ultra-précise des sections avec throttling
       const sections = [
         { ref: sectionRefs.accueil, index: 0 },
-        { ref: sectionRefs.scripts, index: 1 },
-        { ref: sectionRefs.presentation, index: 2 },
-        { ref: sectionRefs.events, index: 3 },
-        { ref: sectionRefs.regles, index: 4 },
-        { ref: sectionRefs.staff, index: 5 }
+        { ref: sectionRefs.presentation, index: 1 },
+        { ref: sectionRefs.events, index: 2 },
+        { ref: sectionRefs.regles, index: 3 },
+        { ref: sectionRefs.staff, index: 4 }
       ];
 
       let currentSection = 0;
@@ -925,10 +923,10 @@ const App = () => {
               `${isDarkMode ? 'bg-black/20' : 'bg-white/20'} backdrop-blur-xl`
             }`}
             style={{
-              background: isScrolled ? 
-                `linear-gradient(135deg, ${isDarkMode ? 'rgba(0,0,0,0.5)' : 'rgba(255,255,255,0.5)'} 0%, rgba(139,0,210,0.1) 50%, ${isDarkMode ? 'rgba(0,0,0,0.5)' : 'rgba(255,255,255,0.5)'} 100%)` :
-                `linear-gradient(135deg, ${isDarkMode ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.2)'} 0%, rgba(139,0,210,0.05) 50%, ${isDarkMode ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.2)'} 100%)`,
-              boxShadow: isScrolled ? '0 8px 32px rgba(139, 0, 210, 0.1)' : 'none'
+              background: isScrolled ?
+                `linear-gradient(135deg, ${isDarkMode ? 'rgba(0,0,0,0.5)' : 'rgba(255,255,255,0.5)'} 0%, rgba(59,130,246,0.1) 50%, ${isDarkMode ? 'rgba(0,0,0,0.5)' : 'rgba(255,255,255,0.5)'} 100%)` :
+                `linear-gradient(135deg, ${isDarkMode ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.2)'} 0%, rgba(59,130,246,0.05) 50%, ${isDarkMode ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.2)'} 100%)`,
+              boxShadow: isScrolled ? '0 8px 32px rgba(59,130,246,0.1)' : 'none'
             }}
           >
             {/* Barre de lumière supérieure */}
@@ -947,45 +945,20 @@ const App = () => {
             
             {/* Logo premium avec effets sophistiqués */}
             <motion.div 
-              className="flex items-center space-x-3 group cursor-pointer"
+              className="flex items-center space-x-3 group cursor-pointer" // Assure l'alignement horizontal et l'espacement
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
             >
+              <img src="/alkia-logo.png" alt="AlkiaRP" className="w-10 h-10 object-contain" /> {/* Logo AlkiaRP */}
               <div className="flex flex-col">
                 <motion.h1 
-                  className="text-2xl font-black tracking-tight relative flex items-center"
+                  className="text-2xl font-black tracking-tight relative"
                   whileHover={{ scale: 1.02 }}
                 >
-                  <span 
-                    className="text-alkia-violet flex items-center"
-                    style={{
-                      filter: 'drop-shadow(0 0 8px rgba(139, 0, 210, 0.3))'
-                    }}
-                  >
-                    {/* Logo parfaitement intégré remplaçant le A */}
-                    <motion.img 
-                      src="/alkia-logo.png" 
-                      alt="A" 
-                      className="w-10 h-10 object-contain inline-block mr-1"
-                      whileHover={{ rotate: 10, scale: 1.1 }}
-                      transition={{ duration: 0.3 }}
-                      style={{
-                        filter: 'drop-shadow(0 0 8px rgba(139, 0, 210, 0.4))',
-                        marginBottom: '2px', // Ajustement vertical parfait
-                        marginTop: '1px'
-                      }}
-                    />
-                    LKIA
-                  </span>
-                  <span className={`${isDarkMode ? 'text-white' : 'text-black'} ml-1`}>RP</span>
+                  {/* Titre modifié : Evolution en bleu, RP en couleur par défaut */}
+                  <span className="text-blue-500">Evolution</span>
+                  <span className={`${isDarkMode ? 'text-white' : 'text-black'}`}> RP</span>
                 </motion.h1>
-                <motion.p 
-                  className="text-xs font-bold tracking-wider text-alkia-violet/60"
-                  animate={{ opacity: [0.6, 1, 0.6] }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                >
-                  PREMIUM//2024
-                </motion.p>
               </div>
             </motion.div>
 
@@ -993,7 +966,6 @@ const App = () => {
             <div className="hidden md:flex items-center space-x-2">
               {[
                 { name: 'ACCUEIL', icon: <BiWorld className="w-4 h-4" />, section: 'accueil' },
-                { name: 'SCRIPTS', icon: <HiChip className="w-4 h-4" />, section: 'scripts' },
                 { name: 'PRÉSENTATION', icon: <TbPolygon className="w-4 h-4" />, section: 'presentation' },
                 { name: 'ÉVÉNEMENTS', icon: <TbCalendarEvent className="w-4 h-4" />, section: 'events' },
                 { name: 'RÈGLES', icon: <TbPolygon className="w-4 h-4" />, section: 'regles' },
@@ -1031,7 +1003,7 @@ const App = () => {
                         layoutId="activeIndicator"
                         className="absolute inset-0 bg-alkia-violet/10 rounded-xl border border-alkia-violet/40"
                         style={{
-                          boxShadow: '0 0 20px rgba(139, 0, 210, 0.2)'
+                          boxShadow: '0 0 20px rgba(139, 92, 246, 0.2)'
                         }}
                         transition={{ type: "spring", stiffness: 500, damping: 30 }}
                       />
@@ -1048,7 +1020,7 @@ const App = () => {
             <div className="flex items-center space-x-4">
               <motion.button
                 className="px-5 py-3 bg-[#5865F2] text-white font-bold rounded-xl flex items-center space-x-2 relative overflow-hidden"
-                onClick={() => window.open('https://discord.gg/alkiarp', '_blank')}
+                onClick={() => window.open('https://discord.gg/revrp', '_blank')}
                 whileHover={{ 
                   scale: 1.05, 
                   boxShadow: "0 8px 30px rgba(88, 101, 242, 0.4)" 
@@ -1078,7 +1050,8 @@ const App = () => {
                 onClick={connectToFiveM}
                 whileHover={{ 
                   scale: 1.05, 
-                  boxShadow: "0 8px 30px rgba(139, 0, 210, 0.5)" 
+                  y: -3,
+                  boxShadow: "0 15px 50px rgba(139, 92, 246, 0.5)" 
                 }}
                 whileTap={{ scale: 0.95 }}
                 animate={{
@@ -1090,7 +1063,7 @@ const App = () => {
                 }}
                 style={{ 
                   backgroundSize: "200% 200%",
-                  boxShadow: '0 4px 20px rgba(139, 0, 210, 0.3)'
+                  boxShadow: '0 8px 30px rgba(139, 92, 246, 0.3)'
                 }}
               >
                 <RiSpaceShipLine className="w-4 h-4" />
@@ -1152,741 +1125,282 @@ const App = () => {
         </div>
       </motion.nav>
 
-      {/* Hero section ultra-premium */}
-      <section ref={sectionRefs.accueil} className="min-h-screen flex items-center relative overflow-hidden pt-20">
-        <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          
-          {/* Contenu textuel premium */}
-          <motion.div 
-            className="relative z-10"
-            initial={{ opacity: 0, x: -60 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-          >
-            {/* Badge ultra-élégant */}
+      {/* Hero section ultra-premium avec Plan 3D intégré */}
+      <section ref={sectionRefs.accueil} className="min-h-screen flex items-center relative overflow-hidden pt-20 lg:pt-32">
+        <div className="max-w-7xl mx-auto px-8 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+            
+            {/* Contenu textuel premium (Gauche) */}
             <motion.div 
-              className="inline-flex items-center space-x-3 mb-8 px-6 py-3 bg-gradient-to-r from-alkia-violet/20 via-alkia-violetLight/20 to-cyan-400/20 backdrop-blur-2xl border border-alkia-violet/40 rounded-2xl relative overflow-hidden"
-              whileHover={{ scale: 1.03, y: -2 }}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              style={{
-                boxShadow: '0 8px 32px rgba(139, 0, 210, 0.2)'
-              }}
+              className="relative z-10 text-center lg:text-left"
+              initial={{ opacity: 0, x: -60 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
             >
+              {/* Badge ultra-élégant */}
               <motion.div 
-                className="w-3 h-3 bg-gradient-to-r from-alkia-violet to-cyan-400 rounded-full relative"
-                animate={{ 
-                  scale: [1, 1.3, 1],
-                  boxShadow: [
-                    "0 0 10px rgba(139, 0, 210, 0.5)",
-                    "0 0 20px rgba(139, 0, 210, 0.8)",
-                    "0 0 10px rgba(139, 0, 210, 0.5)"
-                  ]
-                }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <motion.div 
-                  className="absolute inset-0 bg-white rounded-full"
-                  animate={{ scale: [0, 1, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-                />
-              </motion.div>
-              <span className="text-alkia-violet font-bold text-sm tracking-wide">
-                SERVEUR FIVEM PREMIUM
-              </span>
-              <motion.div
-                animate={{ rotate: [0, 360] }}
-                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-              >
-                <HiSparkles className="w-4 h-4 text-cyan-400" />
-              </motion.div>
-              
-              {/* Shimmer effect */}
-              <motion.div 
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-                animate={{ x: ["-100%", "200%"] }}
-                transition={{ 
-                  duration: 3, 
-                  repeat: Infinity,
-                  repeatDelay: 4
-                }}
-              />
-            </motion.div>
-
-            {/* Titre épique avec effets premium */}
-            <motion.h1 
-              className="text-7xl lg:text-8xl font-black mb-8 leading-none relative"
-              initial={{ opacity: 0, y: 80 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.5, delay: 0.5 }}
-            >
-              <motion.span 
-                className="block bg-gradient-to-r from-alkia-violet via-alkia-violetLight to-cyan-400 bg-clip-text text-transparent relative"
-                animate={{
-                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-                }}
-                transition={{ duration: 8, repeat: Infinity }}
-                style={{ 
-                  backgroundSize: "200% 200%",
-                  filter: 'drop-shadow(0 0 20px rgba(139, 0, 210, 0.3))'
-                }}
-              >
-                ALKIA
-                
-                {/* Effet de glow sur le texte */}
-                <motion.div 
-                  className="absolute inset-0 bg-gradient-to-r from-alkia-violet/20 to-cyan-400/20 blur-2xl"
-                  animate={{ 
-                    opacity: [0.3, 0.8, 0.3],
-                    scale: [0.8, 1.2, 0.8]
-                  }}
-                  transition={{ duration: 4, repeat: Infinity }}
-                />
-              </motion.span>
-              <motion.span 
-                className={`block ${isDarkMode ? 'text-white' : 'text-black'} relative`}
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1, duration: 1 }}
+                className="inline-flex items-center space-x-3 mb-8 px-6 py-3 bg-gradient-to-r from-alkia-violet/20 via-alkia-violetLight/20 to-cyan-400/20 backdrop-blur-2xl border border-alkia-violet/40 rounded-2xl relative overflow-hidden mx-auto lg:mx-0"
+                whileHover={{ scale: 1.03, y: -2 }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
                 style={{
-                  textShadow: `0 0 30px ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'}`
+                  boxShadow: '0 8px 32px rgba(139, 92, 246, 0.2)'
                 }}
               >
-                ROLEPLAY
-              </motion.span>
-            </motion.h1>
-
-            <motion.p 
-              className={`text-xl ${isDarkMode ? 'text-white/80' : 'text-black/80'} mb-12 max-w-lg leading-relaxed`}
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.8 }}
-            >
-              Rejoignez la communauté RP la plus immersive de FiveM avec des 
-              <motion.span 
-                className="text-transparent bg-gradient-to-r from-alkia-violet to-cyan-400 bg-clip-text font-bold"
-                animate={{ 
-                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-                }}
-                transition={{ duration: 3, repeat: Infinity }}
-                style={{ backgroundSize: "200% 200%" }}
-              >
-                {" "}scripts exclusifs et une économie réaliste
-              </motion.span>
-            </motion.p>
-
-            {/* Boutons d'action ultra-premium */}
-            <motion.div 
-              className="flex flex-col sm:flex-row gap-6"
-              initial={{ opacity: 0, y: 60 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 1.2 }}
-            >
-              <motion.button
-                className="group px-10 py-5 bg-gradient-to-r from-alkia-violet to-alkia-violetLight text-white font-bold text-lg rounded-2xl flex items-center space-x-3 relative overflow-hidden"
-                onClick={connectToFiveM}
-                whileHover={{ 
-                  scale: 1.05, 
-                  y: -3,
-                  boxShadow: "0 15px 50px rgba(139, 0, 210, 0.5)" 
-                }}
-                whileTap={{ scale: 0.95 }}
-                animate={{
-                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-                }}
-                transition={{
-                  backgroundPosition: { duration: 3, repeat: Infinity },
-                  default: { duration: 0.3 }
-                }}
-                style={{ 
-                  backgroundSize: "200% 200%",
-                  boxShadow: '0 8px 30px rgba(139, 0, 210, 0.3)'
-                }}
-              >
-                <motion.div
-                  animate={{ rotate: [0, 360] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                >
-                  <FaRocket className="w-5 h-5" />
-                </motion.div>
-                <span>REJOINDRE LE SERVEUR</span>
-                <motion.div
-                  animate={{ x: [0, 5, 0] }}
+                <motion.div 
+                  className="w-3 h-3 bg-gradient-to-r from-alkia-violet to-cyan-400 rounded-full relative"
+                  animate={{ 
+                    scale: [1, 1.3, 1],
+                    boxShadow: [
+                      "0 0 10px rgba(59,130,246, 0.5)",
+                      "0 0 20px rgba(59,130,246, 0.8)",
+                      "0 0 10px rgba(59,130,246, 0.5)"
+                    ]
+                  }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
-                  <FaArrowRight className="w-4 h-4" />
+                  <motion.div 
+                    className="absolute inset-0 bg-white rounded-full"
+                    animate={{ scale: [0, 1, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                  />
+                </motion.div>
+                <span className="text-alkia-violet font-bold text-sm tracking-wide">
+                  REVOLUTIONRP PREMIUM
+                </span>
+                <motion.div
+                  animate={{ rotate: [0, 360] }}
+                  transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                >
+                  <HiSparkles className="w-4 h-4 text-cyan-400" />
                 </motion.div>
                 
-                {/* Effet de vague */}
+                {/* Shimmer effect */}
                 <motion.div 
-                  className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12"
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
                   animate={{ x: ["-100%", "200%"] }}
                   transition={{ 
-                    duration: 2, 
+                    duration: 3, 
                     repeat: Infinity,
                     repeatDelay: 4
                   }}
                 />
-                
-                {/* Particules magiques */}
-                <div className="absolute inset-0 pointer-events-none">
-                  {[...Array(12)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      className="absolute w-1 h-1 bg-white rounded-full"
-                      style={{
-                        left: `${Math.random() * 100}%`,
-                        top: `${Math.random() * 100}%`
-                      }}
-                      animate={{
-                        scale: [0, 1.5, 0],
-                        opacity: [0, 1, 0]
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        delay: i * 0.2
-                      }}
-                    />
-                  ))}
-                </div>
-              </motion.button>
+              </motion.div>
 
-              <motion.button
-                className="px-10 py-5 bg-gradient-to-r from-alkia-violet to-cyan-400 text-white font-bold text-lg rounded-2xl flex items-center space-x-3 relative overflow-hidden"
-                onClick={() => window.open('https://discord.gg/alkiarp', '_blank')}
-                whileHover={{ 
-                  scale: 1.05, 
-                  y: -3,
-                  boxShadow: "0 15px 50px rgba(139, 0, 210, 0.5)" 
-                }}
-                whileTap={{ scale: 0.95 }}
-                animate={{
-                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-                }}
-                transition={{
-                  backgroundPosition: { duration: 4, repeat: Infinity },
-                  default: { duration: 0.3 }
-                }}
-                style={{ 
-                  backgroundSize: "200% 200%",
-                  boxShadow: '0 8px 30px rgba(139, 0, 210, 0.3)'
-                }}
+              {/* Titre épique avec effets premium */}
+              <motion.h1 
+                className="text-6xl md:text-7xl lg:text-8xl font-black mb-8 leading-tight relative"
+                initial={{ opacity: 0, y: 80 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1.5, delay: 0.5 }}
               >
-                <motion.div
-                  animate={{ rotate: [0, 360] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                <motion.span 
+                  className="block bg-gradient-to-r from-alkia-violet via-alkia-violetLight to-cyan-400 bg-clip-text text-transparent relative"
+                  animate={{
+                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
+                  }}
+                  transition={{ duration: 8, repeat: Infinity }}
+                  style={{ 
+                    backgroundSize: "200% 200%",
+                    filter: 'drop-shadow(0 0 20px rgba(139, 92, 246, 0.3))'
+                  }}
+                >
+                  REVOLUTION
+                  
+                  {/* Effet de glow sur le texte */}
+                  <motion.div 
+                    className="absolute inset-0 bg-gradient-to-r from-alkia-violet/20 to-cyan-400/20 blur-2xl"
+                    animate={{ 
+                      opacity: [0.3, 0.8, 0.3],
+                      scale: [0.8, 1.2, 0.8]
+                    }}
+                    transition={{ duration: 4, repeat: Infinity }}
+                  />
+                </motion.span>
+                <motion.span 
+                  className={`block ${isDarkMode ? 'text-white' : 'text-black'} relative`}
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 1, duration: 1 }}
+                  style={{
+                    textShadow: `0 0 30px ${isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'}`
+                  }}
+                >
+                  ROLEPLAY
+                </motion.span>
+              </motion.h1>
+
+              <motion.p 
+                className={`text-lg md:text-xl ${isDarkMode ? 'text-white/80' : 'text-black/80'} mb-10 max-w-lg leading-relaxed mx-auto lg:mx-0`}
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.8 }}
+              >
+                Découvrez les systèmes uniques qui font de RevolutionRP une 
+                <span className="text-transparent bg-gradient-to-r from-alkia-violet to-cyan-400 bg-clip-text font-bold">
+                  {" "}expérience RP exceptionnelle.
+                </span>
+                 Plongez dans un univers immersif avec des scripts exclusifs et une communauté active.
+              </motion.p>
+              
+              {/* Boutons d'action Hero */}
+              <motion.div 
+                className="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 1.2 }}
+              >
+                <motion.button
+                  className="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-alkia-violet to-alkia-violetLight text-white font-bold text-lg rounded-xl flex items-center justify-center space-x-3 relative overflow-hidden shadow-lg hover:shadow-blue-500/40 transition-all duration-300"
+                  onClick={connectToFiveM}
+                  whileHover={{ scale: 1.05, y: -3 }}
+                  whileTap={{ scale: 0.95 }}
+                  style={{ boxShadow: '0 8px 30px rgba(59,130,246,0.3)'}}
                 >
                   <RiSpaceShipLine className="w-5 h-5" />
-                </motion.div>
-                <span>REJOINDRE DISCORD</span>
-                <motion.div
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
+                  <span>REJOINDRE L'AVENTURE</span>
+                  <motion.div className="absolute inset-0 bg-white/10 opacity-0 hover:opacity-100 transition-opacity duration-300" />
+                </motion.button>
+                <motion.button
+                  className="w-full sm:w-auto px-8 py-4 bg-transparent text-white font-semibold rounded-xl flex items-center justify-center space-x-3 border-2 border-alkia-violet/50 hover:bg-alkia-violet/20 hover:border-alkia-violet transition-all duration-300"
+                  onClick={() => scrollToSection('presentation')} // Renvoie vers la section présentation (ancienne vidéo)
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  <FaArrowRight className="w-4 h-4" />
-                </motion.div>
-                
-                {/* Effet de vague */}
+                  <FaPlay className="w-4 h-4" />
+                  <span>VOIR L'APERÇU</span>
+                </motion.button>
+              </motion.div>
+            </motion.div>
+
+            {/* Plan 3D avec logo géant (Droite) - Déplacé ici */}
+            <motion.div 
+              className="hidden lg:flex items-center justify-center relative mt-12 lg:mt-0"
+              initial={{ opacity: 0, x: 60, scale: 0.8 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
+            >
+              <div className="relative">
+                {/* Logo principal géant en 3D */}
                 <motion.div 
-                  className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12"
-                  animate={{ x: ["-100%", "200%"] }}
-                  transition={{ 
-                    duration: 2, 
-                    repeat: Infinity,
-                    repeatDelay: 3
+                  className="relative w-72 h-72 lg:w-96 lg:h-96 bg-gradient-to-br from-gray-800/70 via-gray-900/70 to-black/70 backdrop-blur-md rounded-3xl flex items-center justify-center overflow-hidden border border-alkia-violet/30"
+                  animate={{ 
+                    rotateY: [0, 360],
+                    rotateX: [0, 10, -5, 10, 0],
+                    scale: [1, 1.05, 1],
+                    boxShadow: [
+                      "0 0 50px rgba(139, 92, 246, 0.3)",
+                      "0 0 100px rgba(139, 92, 246, 0.5)",
+                      "0 0 50px rgba(139, 92, 246, 0.3)"
+                    ]
                   }}
-                />
-                
-                {/* Particules cyan */}
-                <div className="absolute inset-0 pointer-events-none">
-                  {[...Array(8)].map((_, i) => (
+                  transition={{ 
+                    rotateY: { duration: 25, repeat: Infinity, ease: "linear" },
+                    rotateX: { duration: 10, repeat: Infinity, ease: "easeInOut" },
+                    scale: { duration: 5, repeat: Infinity, ease: "easeInOut" },
+                    boxShadow: { duration: 3.5, repeat: Infinity, ease: "easeInOut" }
+                  }}
+                  style={{
+                    transformStyle: "preserve-3d",
+                    perspective: "1200px"
+                  }}
+                >
+                  <motion.div
+                    className="relative z-10"
+                    animate={{
+                      filter: ["drop-shadow(0 0 15px rgba(139, 92, 246, 0.4))", "drop-shadow(0 0 30px rgba(139, 92, 246, 0.6))", "drop-shadow(0 0 15px rgba(139, 92, 246, 0.4))"],
+                      rotateZ: [0, -360],
+                      scale: [0.85, 1.1, 0.85]
+                    }}
+                    transition={{
+                      filter: {duration: 3.5, repeat: Infinity, ease: "easeInOut"},
+                      rotateZ: { duration: 18, repeat: Infinity, ease: "linear" },
+                      scale: { duration: 6, repeat: Infinity, ease: "easeInOut" }
+                    }}
+                  >
+                    <img src="/alkia-logo.png" alt="RevolutionRP Core" className="w-36 h-36 lg:w-48 lg:h-48 object-contain" />
+                  </motion.div>
+                  
+                  {/* Particules orbitales */}
+                  {[...Array(10)].map((_, i) => (
                     <motion.div
                       key={i}
-                      className="absolute w-1 h-1 bg-cyan-300 rounded-full"
+                      className="absolute w-2 h-2 bg-gradient-to-r from-alkia-violet to-cyan-400 rounded-full"
                       style={{
-                        left: `${Math.random() * 100}%`,
-                        top: `${Math.random() * 100}%`
+                        top: "50%",
+                        left: "50%"
                       }}
                       animate={{
-                        scale: [0, 1.5, 0],
-                        opacity: [0, 1, 0]
+                        rotate: [0, 360],
+                        x: [0, Math.cos(i * 36 * Math.PI / 180) * (140 + Math.random()*20)], // Variation du rayon
+                        y: [0, Math.sin(i * 36 * Math.PI / 180) * (140 + Math.random()*20)], // Variation du rayon
+                        scale: [0, 1.2, 0],
+                        opacity: [0, 0.9, 0]
                       }}
                       transition={{
-                        duration: 2,
+                        duration: 7 + Math.random() * 3,
                         repeat: Infinity,
-                        delay: i * 0.3
+                        delay: i * 0.25,
+                        ease: "linear"
                       }}
                     />
                   ))}
-                </div>
-              </motion.button>
-            </motion.div>
-          </motion.div>
-
-          {/* Visualisation 3D ultra-premium */}
-          <motion.div 
-            className="relative flex items-center justify-center"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.5, delay: 0.8 }}
-            style={{ y: y1 }}
-          >
-            <div className="relative w-full h-96 lg:h-[650px] flex items-center justify-center">
-              {/* Container 3D avec effets premium */}
-              <div className="absolute inset-0 perspective-1000 flex items-center justify-center">
-                <motion.div 
-                  className="relative transform-gpu flex items-center justify-center"
-                  style={{
-                    rotateX: mousePos.y * 10,
-                    rotateY: mousePos.x * 10,
-                    transformStyle: 'preserve-3d'
-                  }}
-                  transition={{ type: "spring", stiffness: 200, damping: 50 }}
-                >
-                  {/* Logo principal géant en 3D */}
+                  
+                  {/* Anneaux orbitaux */}
                   <motion.div 
-                    className="relative w-64 h-64 lg:w-80 lg:h-80 bg-gradient-to-br from-alkia-violet via-alkia-violetLight to-cyan-400 rounded-3xl flex items-center justify-center overflow-hidden"
+                    className="absolute inset-2 border-2 border-alkia-violet/40 rounded-full opacity-50"
                     animate={{ 
-                      rotateY: [0, 360],
-                      rotateX: [0, 15, 0, -15, 0],
-                      scale: [1, 1.1, 1],
-                      boxShadow: [
-                        "0 0 60px rgba(139, 0, 210, 0.5)",
-                        "0 0 120px rgba(139, 0, 210, 0.8)",
-                        "0 0 60px rgba(139, 0, 210, 0.5)"
-                      ]
+                      rotate: [0, 360],
+                      scale: [1, 1.2, 1]
                     }}
                     transition={{ 
-                      rotateY: { duration: 20, repeat: Infinity, ease: "linear" },
-                      rotateX: { duration: 8, repeat: Infinity, ease: "easeInOut" },
-                      scale: { duration: 6, repeat: Infinity, ease: "easeInOut" },
-                      boxShadow: { duration: 4, repeat: Infinity }
+                      rotate: { duration: 15, repeat: Infinity, ease: "linear" },
+                      scale: { duration: 7, repeat: Infinity, ease: "easeInOut" }
                     }}
-                    whileHover={{ 
-                      scale: 1.2, 
-                      rotateZ: 15,
-                      boxShadow: "0 0 150px rgba(139, 0, 210, 1)"
+                    style={{ transform: "rotateX(70deg)" }}
+                  />
+                  <motion.div 
+                    className="absolute inset-4 border border-cyan-400/40 rounded-full opacity-40"
+                    animate={{ 
+                      rotate: [360, 0],
+                      scale: [1.1, 0.9, 1.1]
                     }}
-                    style={{
-                      backgroundSize: "400% 400%",
-                      boxShadow: '0 0 80px rgba(139, 0, 210, 0.4), inset 0 4px 0 rgba(255, 255, 255, 0.2)',
-                      transformStyle: 'preserve-3d'
+                    transition={{ 
+                      rotate: { duration: 22, repeat: Infinity, ease: "linear" },
+                      scale: { duration: 9, repeat: Infinity, ease: "easeInOut" }
                     }}
-                  >
-                    {/* Logo central géant */}
-                    <motion.img 
-                      src="/alkia-logo.png" 
-                      alt="AlkiaRP Core" 
-                      className="w-40 h-40 lg:w-52 lg:h-52 object-contain filter drop-shadow-2xl relative z-10" 
-                      animate={{
-                        scale: [1, 1.05, 1],
-                        filter: [
-                          "drop-shadow(0 0 20px rgba(255, 255, 255, 0.5))",
-                          "drop-shadow(0 0 40px rgba(255, 255, 255, 0.8))",
-                          "drop-shadow(0 0 20px rgba(255, 255, 255, 0.5))"
-                        ]
-                      }}
-                      transition={{ duration: 3, repeat: Infinity }}
-                      whileHover={{ scale: 1.1, rotate: 360 }}
-                    />
-                    
-                    {/* Pulse énergétique */}
-                    <motion.div 
-                      className="absolute inset-0 bg-gradient-to-r from-white/10 via-cyan-400/20 to-white/10 rounded-3xl"
-                      animate={{
-                        scale: [1, 1.3, 1],
-                        opacity: [0.2, 0.6, 0.2],
-                        rotate: [0, 180, 360]
-                      }}
-                      transition={{ duration: 4, repeat: Infinity }}
-                    />
-                    
-                    {/* Anneaux orbitaux premium */}
-                    {[...Array(4)].map((_, i) => (
-                      <motion.div
-                        key={i}
-                        className="absolute border-2 rounded-full"
-                        style={{
-                          width: `${350 + i * 80}px`,
-                          height: `${350 + i * 80}px`,
-                          borderColor: i % 3 === 0 ? 'rgba(139, 0, 210, 0.3)' : 
-                                     i % 3 === 1 ? 'rgba(0, 212, 255, 0.3)' : 
-                                     'rgba(255, 0, 110, 0.3)',
-                          left: '50%',
-                          top: '50%',
-                          transform: 'translate(-50%, -50%)'
-                        }}
-                        animate={{ 
-                          rotate: [0, 360],
-                          scale: [1, 1.05, 1],
-                          opacity: [0.3, 0.6, 0.3]
-                        }}
-                        transition={{ 
-                          rotate: { 
-                            duration: 15 + i * 5, 
-                            repeat: Infinity, 
-                            ease: "linear",
-                            direction: i % 2 === 0 ? "normal" : "reverse"
-                          },
-                          scale: { duration: 6 + i, repeat: Infinity },
-                          opacity: { duration: 3 + i, repeat: Infinity }
-                        }}
-                      />
-                    ))}
-                    
-                    {/* Effet de brillance */}
-                    <motion.div 
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-3xl"
-                      animate={{ x: ["-100%", "200%"] }}
-                      transition={{ 
-                        duration: 3, 
-                        repeat: Infinity,
-                        repeatDelay: 5
-                      }}
-                    />
-                  </motion.div>
+                    style={{ transform: "rotateX(-60deg) rotateY(20deg)" }}
+                  />
+                  
+                  {/* Effet de lueur interne */}
+                  <motion.div 
+                    className="absolute inset-0 bg-gradient-to-radial from-alkia-violet/10 via-transparent to-transparent rounded-3xl blur-lg"
+                    animate={{ 
+                      opacity: [0.2, 0.6, 0.2],
+                      scale: [0.9, 1.3, 0.9]
+                    }}
+                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                  />
+                </motion.div>
+                
+                {/* Éléments flottants décoratifs */}
+                <motion.div 
+                  className="absolute -top-10 -left-10 w-20 h-20 bg-alkia-violet/10 rounded-2xl backdrop-blur-lg border border-alkia-violet/30 flex items-center justify-center shadow-xl"
+                  animate={{ y: [0, -15, 0], x: [0, 10, 0], rotate: [0, 120, 240, 360] }}
+                  transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <HiOutlineCode className="w-10 h-10 text-alkia-violet opacity-70" />
+                </motion.div>
+                <motion.div 
+                  className="absolute -bottom-12 right-0 w-24 h-24 bg-cyan-400/10 rounded-3xl backdrop-blur-lg border border-cyan-400/30 flex items-center justify-center shadow-xl"
+                  animate={{ y: [0, 18, 0], x: [0, -12, 0], rotate: [360, 240, 120, 0] }}
+                  transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <TbAtom className="w-12 h-12 text-cyan-400 opacity-70" />
                 </motion.div>
               </div>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Éléments décoratifs premium */}
-        <div className="absolute top-20 right-20 opacity-30">
-          <motion.div 
-            className="w-32 h-32 border-4 border-alkia-violet/30 rounded-full"
-            animate={{ 
-              rotate: 360,
-              scale: [1, 1.2, 1]
-            }}
-            transition={{ 
-              rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-              scale: { duration: 6, repeat: Infinity }
-            }}
-          />
-        </div>
-        
-        <div className="absolute bottom-20 left-20 opacity-20">
-          <motion.div 
-            className="w-24 h-24 bg-gradient-to-br from-cyan-400/30 to-alkia-violet/30 rounded-2xl"
-            animate={{ 
-              rotate: [0, 45, 0],
-              scale: [1, 1.1, 1]
-            }}
-            transition={{ duration: 8, repeat: Infinity }}
-          />
-        </div>
-      </section>
-
-      {/* Section Discord/Serveur ultra-moderne */}
-      <section className="py-24 relative">
-        <div className="max-w-6xl mx-auto px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-            
-            {/* Notre Discord */}
-            <motion.div 
-              className="text-center"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1 }}
-              viewport={{ once: true }}
-            >
-              <motion.div 
-                className="mb-8"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="w-24 h-24 mx-auto mb-6 bg-[#5865F2] rounded-3xl flex items-center justify-center relative overflow-hidden">
-                  <FaDiscord className="w-12 h-12 text-white" />
-                  
-                  {/* Effet de brillance */}
-                  <motion.div 
-                    className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0"
-                    animate={{ x: ["-100%", "200%"] }}
-                    transition={{ 
-                      duration: 3, 
-                      repeat: Infinity,
-                      repeatDelay: 4
-                    }}
-                  />
-                </div>
-                
-                <h3 className={`text-3xl font-black mb-4 ${isDarkMode ? 'text-white' : 'text-black'}`}>
-                  Notre Discord
-                </h3>
-                
-                <div className="mb-6">
-                  <motion.div 
-                    className="text-5xl font-black text-transparent bg-gradient-to-r from-[#5865F2] to-[#7289da] bg-clip-text mb-2"
-                    animate={{
-                      backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-                    }}
-                    transition={{ duration: 4, repeat: Infinity }}
-                    style={{ backgroundSize: "200% 200%" }}
-                  >
-                    61,587
-                  </motion.div>
-                  <p className={`${isDarkMode ? 'text-white/60' : 'text-black/60'} font-medium`}>
-                    Membres
-                  </p>
-                </div>
-              </motion.div>
-              
-              <motion.button
-                className="w-full px-8 py-4 bg-gradient-to-r from-[#5865F2] to-[#7289da] text-white font-bold text-lg rounded-2xl relative overflow-hidden"
-                onClick={() => window.open('https://discord.gg/alkiarp', '_blank')}
-                whileHover={{ 
-                  scale: 1.05, 
-                  y: -3,
-                  boxShadow: "0 15px 50px rgba(88, 101, 242, 0.5)" 
-                }}
-                whileTap={{ scale: 0.95 }}
-                style={{
-                  boxShadow: '0 8px 30px rgba(88, 101, 242, 0.3)'
-                }}
-              >
-                <span className="relative z-10">Rejoindre Discord</span>
-                
-                {/* Effet de vague */}
-                <motion.div 
-                  className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12"
-                  animate={{ x: ["-100%", "200%"] }}
-                  transition={{ 
-                    duration: 2, 
-                    repeat: Infinity,
-                    repeatDelay: 3
-                  }}
-                />
-              </motion.button>
             </motion.div>
-
-            {/* Séparateur vertical élégant */}
-            <div className="flex justify-center">
-              <motion.div 
-                className="w-1 h-32 bg-gradient-to-b from-transparent via-alkia-violet to-transparent rounded-full"
-                animate={{
-                  opacity: [0.3, 1, 0.3],
-                  scale: [1, 1.1, 1]
-                }}
-                transition={{ duration: 3, repeat: Infinity }}
-                style={{
-                  boxShadow: '0 0 20px rgba(139, 0, 210, 0.5)'
-                }}
-              />
-            </div>
-
-            {/* Notre Serveur */}
-            <motion.div 
-              className="text-center"
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1 }}
-              viewport={{ once: true }}
-            >
-              <motion.div 
-                className="mb-8"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-[#f39c12] to-[#ff8c00] rounded-3xl flex items-center justify-center relative overflow-hidden">
-                  <img src="/alkia-logo.png" alt="AlkiaRP" className="w-12 h-12 object-contain" />
-                  
-                  {/* Effet de rotation */}
-                  <motion.div 
-                    className="absolute inset-0 bg-gradient-to-r from-[#f39c12]/20 to-[#ff8c00]/20"
-                    animate={{ rotate: [0, 360] }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  />
-                </div>
-                
-                <h3 className={`text-3xl font-black mb-4 ${isDarkMode ? 'text-white' : 'text-black'}`}>
-                  Notre Serveur
-                </h3>
-                
-                <div className="mb-6">
-                  <motion.div 
-                    className="text-5xl font-black text-transparent bg-gradient-to-r from-[#f39c12] to-[#ff8c00] bg-clip-text mb-2"
-                    animate={{
-                      backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-                    }}
-                    transition={{ duration: 4, repeat: Infinity }}
-                    style={{ backgroundSize: "200% 200%" }}
-                  >
-                    1544
-                  </motion.div>
-                  <div className="flex items-center justify-center space-x-2">
-                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-                    <p className={`${isDarkMode ? 'text-white/60' : 'text-black/60'} font-medium`}>
-                      en ligne
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-              
-              <motion.button
-                className="w-full px-8 py-4 bg-gradient-to-r from-[#f39c12] to-[#ff8c00] text-white font-bold text-lg rounded-2xl relative overflow-hidden"
-                onClick={connectToFiveM}
-                whileHover={{ 
-                  scale: 1.05, 
-                  y: -3,
-                  boxShadow: "0 15px 50px rgba(243, 156, 18, 0.5)" 
-                }}
-                whileTap={{ scale: 0.95 }}
-                style={{
-                  boxShadow: '0 8px 30px rgba(243, 156, 18, 0.3)'
-                }}
-              >
-                <span className="relative z-10">Se connecter</span>
-                
-                {/* Particules magiques */}
-                <div className="absolute inset-0 pointer-events-none">
-                  {[...Array(8)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      className="absolute w-1 h-1 bg-white rounded-full"
-                      style={{
-                        left: `${Math.random() * 100}%`,
-                        top: `${Math.random() * 100}%`
-                      }}
-                      animate={{
-                        scale: [0, 1.5, 0],
-                        opacity: [0, 1, 0]
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        delay: i * 0.3
-                      }}
-                    />
-                  ))}
-                </div>
-              </motion.button>
-            </motion.div>
-          </div>
-        </div>
-
-        {/* Orbes décoratifs pour cette section */}
-        <div className="absolute top-10 left-10 opacity-20">
-          <motion.div 
-            className="w-32 h-32 bg-gradient-to-br from-[#5865F2]/30 to-[#7289da]/30 rounded-full"
-            animate={{ 
-              scale: [1, 1.2, 1],
-              rotate: [0, 180, 360]
-            }}
-            transition={{ duration: 15, repeat: Infinity }}
-          />
-        </div>
-        
-        <div className="absolute bottom-10 right-10 opacity-15">
-          <motion.div 
-            className="w-24 h-24 bg-gradient-to-br from-[#f39c12]/30 to-[#ff8c00]/30 rounded-full"
-            animate={{ 
-              scale: [1, 1.1, 1],
-              rotate: [360, 180, 0]
-            }}
-            transition={{ duration: 12, repeat: Infinity }}
-          />
-        </div>
-      </section>
-
-      {/* Section services épurée */}
-      <section ref={sectionRefs.scripts} className="py-24 relative">
-        <div className="max-w-7xl mx-auto px-8">
-          
-          <motion.div 
-            className="mb-16 text-center"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            viewport={{ once: true }}
-          >
-            <motion.h2 
-              className="text-6xl font-black mb-6"
-            >
-              <span className="bg-gradient-to-r from-alkia-violet to-cyan-400 bg-clip-text text-transparent">
-                NOS
-              </span>
-              <br />
-              <span className={isDarkMode ? 'text-white' : 'text-black'}>FEATURES</span>
-            </motion.h2>
-            
-            <p className={`text-xl ${isDarkMode ? 'text-white/70' : 'text-black/70'} max-w-2xl mx-auto`}>
-              Découvrez les systèmes uniques qui font d'AlkiaRP une 
-              <span className="text-transparent bg-gradient-to-r from-alkia-violet to-cyan-400 bg-clip-text font-bold">
-                {" "}expérience RP exceptionnelle
-              </span>
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: <BiSupport className="w-8 h-8" />,
-                title: "ÉCONOMIE RÉALISTE",
-                description: "Système économique complet avec banques, entreprises et investissements",
-                features: ["Bourse dynamique", "Entreprises joueurs", "Crédits bancaires"]
-              },
-              {
-                icon: <TbCalendarEvent className="w-8 h-8" />,
-                title: "JOBS EXCLUSIFS",
-                description: "Plus de 50 métiers uniques avec des scripts sur-mesure",
-                features: ["Mécanicien avancé", "Médecin réaliste", "Police immersive"]
-              },
-              {
-                icon: <HiOutlineCode className="w-8 h-8" />,
-                title: "SCRIPTS CUSTOM",
-                description: "Développements exclusifs pour une expérience unique",
-                features: ["Interactions avancées", "Systèmes réalistes", "Optimisation parfaite"]
-              }
-            ].map((service, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: index * 0.2 }}
-                viewport={{ once: true }}
-                className="group relative"
-                whileHover={{ y: -5 }}
-              >
-                <div className={`relative p-6 bg-gradient-to-br ${isDarkMode ? 'from-black/40 to-black/20' : 'from-white/40 to-white/20'} backdrop-blur-xl border ${isDarkMode ? 'border-white/10' : 'border-black/10'} hover:border-alkia-violet/30 transition-all duration-500 h-full rounded-2xl`}>
-                  
-                  <div className="flex items-center space-x-4 mb-6">
-                    <div className="p-3 bg-alkia-violet/20 rounded-xl border border-alkia-violet/30">
-                      <div className="text-alkia-violet">
-                        {service.icon}
-                      </div>
-                    </div>
-                    <h3 className={`text-xl font-black ${isDarkMode ? 'text-white' : 'text-black'}`}>
-                      {service.title}
-                    </h3>
-                  </div>
-
-                  <p className={`${isDarkMode ? 'text-white/70' : 'text-black/70'} mb-6 leading-relaxed`}>
-                    {service.description}
-                  </p>
-
-                  <div className="space-y-2 mb-6">
-                    {service.features.map((feature, i) => (
-                      <div key={i} className="flex items-center space-x-2">
-                        <div className="w-2 h-2 bg-alkia-violet rounded-full" />
-                        <span className={`${isDarkMode ? 'text-white/80' : 'text-black/80'} text-sm`}>{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <motion.button
-                    className="w-full py-3 bg-alkia-violet/20 text-alkia-violet font-bold border border-alkia-violet/40 rounded-xl backdrop-blur-xl"
-                    onClick={() => window.open('https://discord.gg/alkiarp', '_blank')}
-                    whileHover={{ backgroundColor: "rgba(139, 0, 210, 0.3)" }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    EN SAVOIR PLUS
-                  </motion.button>
-                </div>
-              </motion.div>
-            ))}
           </div>
         </div>
       </section>
@@ -1911,7 +1425,7 @@ const App = () => {
             </h2>
             
             <p className={`text-lg ${isDarkMode ? 'text-white/70' : 'text-black/70'}`}>
-              Découvrez l'univers AlkiaRP en images
+              Découvrez l'univers RevolutionRP
             </p>
           </motion.div>
 
@@ -1923,30 +1437,21 @@ const App = () => {
             viewport={{ once: true }}
             whileHover={{ scale: 1.01 }}
           >
-            <div className={`relative aspect-video ${isDarkMode ? 'bg-black/60' : 'bg-white/60'} border-2 border-alkia-violet/30 overflow-hidden rounded-2xl backdrop-blur-xl`}>
-              
-              <iframe
-                className="w-full h-full rounded-xl"
-                src="https://www.youtube.com/embed/H1NfVSxcHp0?rel=0&modestbranding=1&autoplay=0&controls=1"
-                title="AlkiaRP - Preview"
-                frameBorder="0"
-                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
-              
-              <div className="absolute top-4 left-4 flex items-center space-x-2">
-                <div className={`flex items-center space-x-2 ${isDarkMode ? 'bg-black/70' : 'bg-white/70'} backdrop-blur-xl px-3 py-1 rounded-full border border-green-500/50`}>
-                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                  <span className={`${isDarkMode ? 'text-white' : 'text-black'} font-mono text-xs`}>EN LIGNE</span>
-                </div>
-              </div>
-
-              <div className={`absolute bottom-4 right-4 ${isDarkMode ? 'bg-black/70' : 'bg-white/70'} backdrop-blur-xl px-4 py-2 rounded-xl border border-alkia-violet/50`}>
-                <div className="text-2xl font-black text-transparent bg-gradient-to-r from-alkia-violet to-cyan-400 bg-clip-text">
-                  128
-                </div>
-                <div className={`${isDarkMode ? 'text-white/70' : 'text-black/70'} text-xs`}>JOUEURS</div>
-              </div>
+            {/* Cadre vidéo conservé, contenu modifié */}
+            <div className={`relative aspect-video ${isDarkMode ? 'bg-black/60' : 'bg-white/60'} border-2 border-alkia-violet/30 overflow-hidden rounded-2xl backdrop-blur-xl flex items-center justify-center`}>
+              <motion.div
+                className="text-center p-8"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+              >
+                <h3 className={`text-2xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-black'}`}>
+                  Contenu Personnalisé Ici
+                </h3>
+                <p className={`text-sm ${isDarkMode ? 'text-white/70' : 'text-black/70'}`}>
+                  Cet espace peut être utilisé pour ce que vous souhaitez.
+                </p>
+              </motion.div>
             </div>
           </motion.div>
         </div>
@@ -2085,7 +1590,7 @@ const App = () => {
                       
                       <motion.button
                         className={`w-full py-3 bg-gradient-to-r ${event.color} text-white font-bold rounded-xl backdrop-blur-xl relative overflow-hidden`}
-                        onClick={() => window.open('https://discord.gg/alkiarp', '_blank')}
+                        onClick={() => window.open('https://discord.gg/revrp', '_blank')}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         disabled={event.status === 'Complet'}
@@ -2146,15 +1651,15 @@ const App = () => {
           >
             <motion.button
               className="px-12 py-4 bg-gradient-to-r from-alkia-violet to-alkia-violetLight text-white font-bold text-lg rounded-2xl flex items-center space-x-3 mx-auto relative overflow-hidden"
-              onClick={() => window.open('https://discord.gg/alkiarp', '_blank')}
+              onClick={() => window.open('https://discord.gg/revrp', '_blank')}
               whileHover={{ 
                 scale: 1.05, 
                 y: -3,
-                boxShadow: "0 15px 50px rgba(139, 0, 210, 0.5)" 
+                boxShadow: "0 15px 50px rgba(139, 92, 246, 0.5)" 
               }}
               whileTap={{ scale: 0.95 }}
               style={{ 
-                boxShadow: '0 8px 30px rgba(139, 0, 210, 0.3)'
+                boxShadow: '0 8px 30px rgba(139, 92, 246, 0.3)'
               }}
             >
               <TbCalendarEvent className="w-5 h-5" />
@@ -2191,14 +1696,14 @@ const App = () => {
               className="text-6xl font-black mb-6"
             >
               <span className="bg-gradient-to-r from-alkia-violet to-cyan-400 bg-clip-text text-transparent">
-                ALKIA
+                REVOLUTIONRP
               </span>
               <br />
               <span className={isDarkMode ? 'text-white' : 'text-black'}>WIKI</span>
             </motion.h2>
             
             <p className={`text-xl ${isDarkMode ? 'text-white/70' : 'text-black/70'} max-w-3xl mx-auto`}>
-              Documentation complète du serveur AlkiaRP
+              Documentation complète du serveur RevolutionRP
             </p>
           </motion.div>
 
@@ -2222,7 +1727,7 @@ const App = () => {
                 <div>
                   <div className={`flex items-center space-x-2 p-2 rounded-lg ${isDarkMode ? 'text-white/90' : 'text-black/90'} font-bold`}>
                     <span>📄</span>
-                    <span>Règlement AlkiaRP</span>
+                    <span>Règlement RevolutionRP</span>
                   </div>
                   
                   {/* Sous-sections */}
@@ -2317,7 +1822,7 @@ const App = () => {
                 <div className="mt-4">
                   <div className={`flex items-center space-x-2 p-2 rounded-lg ${isDarkMode ? 'text-white/90' : 'text-black/90'} font-bold`}>
                     <span>📚</span>
-                    <span>Guide AlkiaRP</span>
+                    <span>Guide RevolutionRP</span>
                   </div>
                   
                   <div className="ml-4 mt-2 space-y-1">
@@ -2376,8 +1881,8 @@ const App = () => {
                     <span className={`text-sm ${isDarkMode ? 'text-white/50' : 'text-black/50'}`}>{'>'}</span>
                     <span className="text-sm text-alkia-violet">
                       {(activeWikiTab === 'general' || activeWikiTab === 'lexique' || activeWikiTab === 'corruption' || activeWikiTab === 'vehicules' || activeWikiTab === 'illegal' || activeWikiTab === 'legal' || activeWikiTab === 'police') 
-                        ? '📄 Règlement AlkiaRP' 
-                        : '📚 Guide AlkiaRP'}
+                        ? '📄 Règlement RevolutionRP' 
+                        : '📚 Guide RevolutionRP'}
                     </span>
                   </div>
                   
@@ -2601,7 +2106,6 @@ const App = () => {
       {/* Section Staff ultra-premium */}
       <section ref={sectionRefs.staff} className="py-24 relative">
         <div className="max-w-7xl mx-auto px-8">
-          
           <motion.div 
             className="mb-20 text-center"
             initial={{ opacity: 0, y: 50 }}
@@ -2609,293 +2113,128 @@ const App = () => {
             transition={{ duration: 1 }}
             viewport={{ once: true }}
           >
-            <motion.h2 
-              className="text-6xl font-black mb-6"
-            >
+            <h2 className={`text-6xl font-black mb-6 ${isDarkMode ? 'text-white' : 'text-black'}`}>
+              NOTRE 
               <span className="bg-gradient-to-r from-alkia-violet to-cyan-400 bg-clip-text text-transparent">
-                NOTRE
+                STAFF
               </span>
-              <br />
-              <span className={isDarkMode ? 'text-white' : 'text-black'}>ÉQUIPE</span>
-            </motion.h2>
-            
-            <p className={`text-xl ${isDarkMode ? 'text-white/70' : 'text-black/70'} max-w-3xl mx-auto`}>
-              Rencontrez l'équipe passionnée derrière AlkiaRP 
-              <span className="text-transparent bg-gradient-to-r from-alkia-violet to-cyan-400 bg-clip-text font-bold">
-                {" "}qui travaille 24/7 pour votre expérience
-              </span>
+            </h2>
+            <p className={`text-xl ${isDarkMode ? 'text-white/70' : 'text-black/70'} max-w-2xl mx-auto`}>
+              Une équipe dévouée et compétente pour garantir la meilleure expérience de jeu.
             </p>
           </motion.div>
 
-          {/* Fondateurs */}
-          <motion.div 
-            className="mb-16"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <h3 className="text-3xl font-black text-center mb-12 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent">
-              👑 FONDATEURS
-            </h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              {[
-                { name: "OBZ", role: "Fondateur Principal", speciality: "Direction & Vision" },
-                { name: "FreZiks", role: "Co-Fondateur", speciality: "Management & Relations" }
-              ].map((founder, index) => (
-                <motion.div
-                  key={founder.name}
-                  className="group relative"
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, delay: 0.3 + index * 0.1 }}
-                  viewport={{ once: true }}
-                  whileHover={{ y: -10, scale: 1.02 }}
-                >
-                  <div className={`relative p-8 bg-gradient-to-br ${isDarkMode ? 'from-black/60 to-black/40' : 'from-white/60 to-white/40'} backdrop-blur-xl border border-yellow-500/40 hover:border-yellow-500/60 transition-all duration-500 rounded-3xl overflow-hidden`}>
-                    
-                    {/* Couronne dorée */}
-                    <div className="absolute top-4 right-4">
-                      <motion.div
-                        animate={{ rotate: [0, 10, 0, -10, 0] }}
-                        transition={{ duration: 3, repeat: Infinity }}
-                      >
-                        <div className="text-3xl">👑</div>
-                      </motion.div>
-                    </div>
-
-                    {/* Avatar */}
-                    <div className="flex flex-col items-center mb-6">
-                      <motion.div 
-                        className="w-24 h-24 bg-gradient-to-br from-yellow-400 via-orange-500 to-red-500 rounded-full flex items-center justify-center text-white text-2xl font-black mb-4 relative overflow-hidden"
-                        whileHover={{ scale: 1.1, rotate: 5 }}
-                        style={{
-                          boxShadow: '0 0 30px rgba(255, 193, 7, 0.5)'
-                        }}
-                      >
-                        {founder.name.charAt(0)}
-                        
-                        {/* Effet de brillance */}
-                        <motion.div 
-                          className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/40 to-white/0"
-                          animate={{ x: ["-100%", "200%"] }}
-                          transition={{ 
-                            duration: 2, 
-                            repeat: Infinity,
-                            repeatDelay: 3
-                          }}
-                        />
-                      </motion.div>
-                      
-                      <h4 className="text-2xl font-black text-yellow-400 mb-2">{founder.name}</h4>
-                      <p className={`${isDarkMode ? 'text-white/80' : 'text-black/80'} font-bold mb-1`}>{founder.role}</p>
-                      <p className={`${isDarkMode ? 'text-white/60' : 'text-black/60'} text-sm text-center`}>{founder.speciality}</p>
-                    </div>
-
-                    {/* Particules dorées */}
-                    <div className="absolute inset-0 pointer-events-none">
-                      {[...Array(8)].map((_, i) => (
-                        <motion.div
-                          key={i}
-                          className="absolute w-2 h-2 bg-yellow-400 rounded-full"
-                          style={{
-                            left: `${Math.random() * 100}%`,
-                            top: `${Math.random() * 100}%`
-                          }}
-                          animate={{
-                            scale: [0, 1.5, 0],
-                            opacity: [0, 0.8, 0],
-                            y: [0, -30]
-                          }}
-                          transition={{
-                            duration: 3,
-                            repeat: Infinity,
-                            delay: i * 0.4
-                          }}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Co-fondateur */}
-          <motion.div 
-            className="mb-16"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
-            <h3 className="text-3xl font-black text-center mb-12 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent">
-               ⚡ CO-FONDATEUR
-            </h3>
-            
-            <div className="max-w-md mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+            {[ // Remplacement des noms par les rôles et spécialités
+              {
+                role: "Fondateur Principal",
+                specialty: "Direction & Vision Stratégique",
+                icon: <RiVipCrownFill className="w-8 h-8 text-alkia-violet" />,
+                color: "alkia-violet",
+                details: [
+                  "Supervision globale du projet",
+                  "Développement des partenariats",
+                  "Gestion de la communauté principale"
+                ]
+              },
+              {
+                role: "Co-Fondateur & Tech Lead",
+                specialty: "Infrastructure & Développement Senior",
+                icon: <HiChip className="w-8 h-8 text-cyan-400" />,
+                color: "cyan-400",
+                details: [
+                  "Maintenance des serveurs",
+                  "Développement des scripts clés",
+                  "Sécurité et optimisation"
+                ]
+              },
+              {
+                role: "Responsable Développement",
+                specialty: "Gestion de l'Équipe Dev & Scripts",
+                icon: <HiOutlineCode className="w-8 h-8 text-green-400" />,
+                color: "green-400",
+                details: [
+                  "Coordination des développeurs",
+                  "Revue de code et intégration",
+                  "Innovation et nouvelles fonctionnalités"
+                ]
+              },
+              {
+                role: "Administrateur Serveur",
+                specialty: "Gestion In-Game & Support Élevé",
+                icon: <RiSettings3Fill className="w-8 h-8 text-orange-400" />,
+                color: "orange-400",
+                details: [
+                  "Application du règlement",
+                  "Gestion des événements majeurs",
+                  "Support technique aux joueurs"
+                ]
+              },
+              {
+                role: "Modérateur Principal",
+                specialty: "Modération & Vie Communautaire",
+                icon: <BiSupport className="w-8 h-8 text-blue-400" />,
+                color: "blue-400",
+                details: [
+                  "Surveillance du chat et des comportements",
+                  "Aide et orientation des joueurs",
+                  "Organisation d'animations mineures"
+                ]
+              },
+              {
+                role: "Community Manager",
+                specialty: "Réseaux Sociaux & Communication",
+                icon: <FaDiscord className="w-8 h-8 text-indigo-400" />,
+                color: "indigo-400",
+                details: [
+                  "Animation Discord et réseaux",
+                  "Création de contenu promotionnel",
+                  "Recueil des retours joueurs"
+                ]
+              }
+            ].map((staff, index) => (
               <motion.div
-                className="group relative"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 0.5 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -10, scale: 1.05 }}
+                key={index}
+                className={`relative p-8 rounded-3xl overflow-hidden border ${isDarkMode ? 'bg-black/50 border-white/10' : 'bg-white/50 border-black/10'} backdrop-blur-2xl shadow-2xl`}
+                initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.7, delay: index * 0.15, ease: "circOut" }}
+                whileHover={{ y: -8, boxShadow: `0 20px 40px rgba(${staff.color === 'alkia-violet' ? '139,0,210' : staff.color === 'cyan-400' ? '0,212,255' : staff.color === 'green-400' ? '74,222,128' : staff.color === 'orange-400' ? '251,146,60' : staff.color === 'blue-400' ? '96,165,250' : '99,102,241'}, 0.3)` }}
               >
-                <div className={`relative p-8 bg-gradient-to-br ${isDarkMode ? 'from-black/60 to-black/40' : 'from-white/60 to-white/40'} backdrop-blur-xl border border-purple-500/40 hover:border-purple-500/60 transition-all duration-500 rounded-3xl overflow-hidden`}>
-                  
-                  {/* Icône code */}
-                  <div className="absolute top-4 right-4">
-                    <motion.div
-                      animate={{ rotate: [0, 360] }}
-                      transition={{ duration: 4, repeat: Infinity }}
-                    >
-                      <div className="text-3xl">⚡</div>
-                    </motion.div>
+                <div className={`absolute -top-3 -left-3 w-16 h-16 bg-${staff.color}/20 rounded-full blur-xl`} />
+                <div className={`absolute -bottom-3 -right-3 w-20 h-20 bg-${staff.color}/10 rounded-full blur-2xl`} /> 
+
+                <div className="relative z-10">
+                  <div className="flex items-center mb-6">
+                    <div className={`p-3 rounded-xl bg-${staff.color}/20 border border-${staff.color}/30 mr-4`}>
+                      {staff.icon}
+                    </div>
+                    <div>
+                      <h3 className={`text-xl font-black ${isDarkMode ? 'text-white' : 'text-black'}`}>{staff.role}</h3>
+                      <p className={`text-sm text-${staff.color}`}>{staff.specialty}</p>
+                    </div>
                   </div>
 
-                  {/* Avatar */}
-                  <div className="flex flex-col items-center mb-6">
-                    <motion.div 
-                      className="w-28 h-28 bg-gradient-to-br from-purple-400 via-pink-500 to-red-500 rounded-full flex items-center justify-center text-white text-3xl font-black mb-4 relative overflow-hidden"
-                      whileHover={{ scale: 1.1, rotate: -5 }}
-                      style={{
-                        boxShadow: '0 0 40px rgba(168, 85, 247, 0.6)'
-                      }}
-                    >
-                      F
-                      
-                      {/* Effet de code */}
-                      <motion.div 
-                        className="absolute inset-0 bg-gradient-to-r from-cyan-400/0 via-cyan-400/30 to-cyan-400/0"
-                        animate={{ x: ["-100%", "200%"] }}
-                        transition={{ 
-                          duration: 1.5, 
-                          repeat: Infinity,
-                          repeatDelay: 2
-                        }}
-                      />
-                    </motion.div>
-                    
-                    <h4 className="text-3xl font-black text-purple-400 mb-2">FIVI</h4>
-                    <p className={`${isDarkMode ? 'text-white/80' : 'text-black/80'} font-bold mb-1`}>Co-fondateur</p>
-                    <p className={`${isDarkMode ? 'text-white/60' : 'text-black/60'} text-sm text-center`}>Architecture & Développement Core</p>
-                  </div>
-
-                  {/* Particules simples */}
-                  <div className="absolute inset-0 pointer-events-none">
-                    {[...Array(4)].map((_, i) => (
-                      <motion.div
-                        key={i}
-                        className="absolute w-1 h-1 bg-purple-400 rounded-full"
-                        style={{
-                          left: `${Math.random() * 100}%`,
-                          top: `${Math.random() * 100}%`
-                        }}
-                        animate={{
-                          scale: [0, 1, 0],
-                          opacity: [0, 0.8, 0]
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          delay: i * 0.5
-                        }}
-                      />
+                  <ul className="space-y-3 mb-6">
+                    {staff.details.map((detail, i) => (
+                      <li key={i} className="flex items-center">
+                        <div className={`w-2 h-2 rounded-full bg-${staff.color} mr-3 shrink-0`} />
+                        <span className={`${isDarkMode ? 'text-white/80' : 'text-black/80'} text-sm`}>{detail}</span>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
+                  
+                  <motion.button 
+                    className={`w-full py-3 rounded-xl bg-${staff.color}/20 text-${staff.color} font-bold border border-${staff.color}/40`}
+                    whileHover={{ backgroundColor: `rgba(${staff.color === 'alkia-violet' ? '139,0,210' : staff.color === 'cyan-400' ? '0,212,255' : staff.color === 'green-400' ? '74,222,128' : staff.color === 'orange-400' ? '251,146,60' : staff.color === 'blue-400' ? '96,165,250' : '99,102,241'}, 0.3)`}}
+                    whileTap={{scale: 0.95}}
+                  >
+                    Contacter (Prochainement)
+                  </motion.button>
                 </div>
               </motion.div>
-            </div>
-          </motion.div>
-
-          {/* Développeurs */}
-          <motion.div 
-            className="mb-16"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h3 className="text-3xl font-black text-center mb-12 bg-gradient-to-r from-blue-400 via-cyan-500 to-teal-500 bg-clip-text text-transparent">
-              🚀 DÉVELOPPEURS
-            </h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
-              {[
-                { name: "BLK", speciality: "Interface & UX" },
-                { name: "KIPSTZ", speciality: "Backend & Database" }
-              ].map((dev, index) => (
-                <motion.div
-                  key={dev.name}
-                  className="group relative"
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, delay: 0.7 + index * 0.1 }}
-                  viewport={{ once: true }}
-                  whileHover={{ y: -5, scale: 1.02 }}
-                >
-                  <div className={`relative p-6 bg-gradient-to-br ${isDarkMode ? 'from-black/40 to-black/20' : 'from-white/40 to-white/20'} backdrop-blur-xl border border-cyan-500/30 hover:border-cyan-500/50 transition-all duration-500 rounded-2xl overflow-hidden`}>
-                    
-                    {/* Avatar */}
-                    <div className="flex flex-col items-center mb-4">
-                      <motion.div 
-                        className="w-20 h-20 bg-gradient-to-br from-blue-400 via-cyan-500 to-teal-500 rounded-full flex items-center justify-center text-white text-xl font-black mb-3 relative overflow-hidden"
-                        whileHover={{ scale: 1.1 }}
-                        style={{
-                          boxShadow: '0 0 25px rgba(34, 211, 238, 0.4)'
-                        }}
-                      >
-                        {dev.name.charAt(0)}
-                        
-                        {/* Effet tech */}
-                        <motion.div 
-                          className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
-                          animate={{ x: ["-100%", "200%"] }}
-                          transition={{ 
-                            duration: 2, 
-                            repeat: Infinity,
-                            repeatDelay: 4 + index
-                          }}
-                        />
-                      </motion.div>
-                      
-                      <h4 className="text-xl font-black text-cyan-400 mb-1">{dev.name}</h4>
-                      <p className={`${isDarkMode ? 'text-white/80' : 'text-black/80'} font-bold text-sm mb-1`}>Développeur</p>
-                      <p className={`${isDarkMode ? 'text-white/60' : 'text-black/60'} text-xs text-center`}>{dev.speciality}</p>
-                    </div>
-
-                    {/* Particules code */}
-                    <div className="absolute inset-0 pointer-events-none">
-                      {['</', '/>', '{}', '[]', '()', '=='].map((symbol, i) => (
-                        <motion.div
-                          key={i}
-                          className="absolute text-cyan-400/60 text-xs font-mono"
-                          style={{
-                            left: `${Math.random() * 80 + 10}%`,
-                            top: `${Math.random() * 80 + 10}%`
-                          }}
-                          animate={{
-                            opacity: [0, 1, 0],
-                            y: [0, -20],
-                            scale: [0.8, 1.2, 0.8]
-                          }}
-                          transition={{
-                            duration: 2,
-                            repeat: Infinity,
-                            delay: i * 0.3
-                          }}
-                        >
-                          {symbol}
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -2913,10 +2252,10 @@ const App = () => {
                   className="w-12 h-12 bg-gradient-to-br from-alkia-violet to-alkia-violetLight rounded-xl flex items-center justify-center relative overflow-hidden"
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   style={{
-                    boxShadow: '0 0 20px rgba(139, 0, 210, 0.3)'
+                    boxShadow: '0 0 20px rgba(139, 92, 246, 0.3)'
                   }}
                 >
-                  <img src="/alkia-logo.png" alt="AlkiaRP" className="w-7 h-7 object-contain" />
+                  <img src="/alkia-logo.png" alt="RevolutionRP" className="w-7 h-7 object-contain" />
                   
                   {/* Effet de brillance */}
                   <motion.div 
@@ -2933,7 +2272,7 @@ const App = () => {
               <div>
                   <h3 className="text-2xl font-black">
                   <span className="bg-gradient-to-r from-alkia-violet to-cyan-400 bg-clip-text text-transparent">
-                    AlkiaRP
+                    RevolutionRP
                   </span>
                 </h3>
                   <p className="text-alkia-violet/60 font-mono text-sm">PREMIUM FIVEM SERVER</p>
@@ -3001,7 +2340,7 @@ const App = () => {
               </h4>
               <div className="space-y-3">
                 <motion.a
-                  href="https://discord.gg/alkiarp"
+                  href="https://discord.gg/revrp"
                   target="_blank"
                   className="flex items-center space-x-3 p-3 bg-[#5865F2]/20 border border-[#5865F2]/30 rounded-xl hover:bg-[#5865F2]/30 transition-all duration-300"
                   whileHover={{ scale: 1.02, x: 5 }}
@@ -3051,7 +2390,7 @@ const App = () => {
               transition={{ duration: 1 }}
             >
               <p className={`${isDarkMode ? 'text-white/40' : 'text-black/40'} font-mono text-sm mb-4 md:mb-0`}>
-                © 2024 AlkiaRP - Tous droits réservés
+                © 2024 RevolutionRP - Tous droits réservés
               </p>
               
               <div className="flex items-center space-x-4">
